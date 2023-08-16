@@ -1,3 +1,5 @@
+# Mini application to output a list of non-matching values
+
 ############ Data ##############
 
 DrawioValuesFile = 'PLACE_DRAWIO_VALUES_HERE.txt'
