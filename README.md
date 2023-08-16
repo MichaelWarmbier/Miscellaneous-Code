@@ -1,4 +1,4 @@
-# Leetcode-Problems
-Collection of LeetCode questions stored on Github for credit.
+# <p align="center">Miscellaneous Code</p>
 
-These solutions are all valid answers. However, their complexity may not be accepted by Leetcode standards. This was a personal choice made to prevent solutions from being limited to their most optimized version in every case.
+<p align="center">An assortment of various scripts, functions, ect that I felt important enough to keep around for one reason or another, organized by language.<br><br>
+<i>All</i> files included are ripped from a project and not necessarily intended to compiled on their own<p>
