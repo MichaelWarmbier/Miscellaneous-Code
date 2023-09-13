@@ -52,5 +52,6 @@ const LAN = {
 
   displayPorts() { console.log(this.Ports); },
   getPort(portName) { for (port of this.Ports) if (portName === port.Name) return port; return null; },
-  clearPorts() { for (port of this.Ports) this.fs.unlinkSync(`${port.Name}.json`); Ports = [] }
+  destroyPorts() { for (port of this.Ports) this.fs.unlinkSync(`${port.Name}.json`); Ports = [] },
+  closePort(portName) { for (port of this.Ports) if (portName === port.Name) port.Status = 0; }
 };
