@@ -2,17 +2,29 @@
 
 const fs = require('fs');
 
-const listenForData = setInterval(function() {
-  // Search for file of specific name
-  fs.readFile('PACK.json', 'utf8', function(e, data) { 
-    // If file has no data or doesn't exist, return no value
-    if (e || !data) console.log(null);
-    // If data is not JSON, return JSON explaining error. Else, return data.
-    else {
-      try { console.log(data = JSON.parse(data)); } 
-      catch { console.log(JSON.parse('{ "ERROR": "Invalid Format" }')); }
-      // Delete file 
-      fs.unlinkSync('PACK.json');
-    }
-  });
-}, 200);
+async function listenForData(portName, listenTimeMS) {
+  
+  const attemptsToMake = Math.floor(listenTimeMS / 100);
+  let totalAttempts = 0;
+
+  return new Promise((resolve, reject) => {
+    const PingInterval = setInterval (() => {
+      totalAttempts++;
+      fs.readFile(`${portName}.json`, 'utf8', function(err, data) {
+
+        if (totalAttempts >= attemptsToMake) { 
+          clearInterval(PingInterval); 
+          resolve({ERROR: 'Response too slow'});
+        }
+          
+        else if (!err && data) {
+          fs.unlinkSync(`${portName}.json`);
+          try { data = JSON.parse(data); }
+          catch { clearInterval(PingInterval); resolve({ERROR: 'Invalid format'}); }
+          resolve(data);
+        }
+          
+      })
+    }, 100);
+  })
+}
